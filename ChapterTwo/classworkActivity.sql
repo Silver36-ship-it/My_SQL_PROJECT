@@ -57,3 +57,58 @@ select SKU, SKU_Description, WarehouseID
 from INVENTORY
 where QuanityOnHand = 0 and QuantityOnOrder = 0
 ORDER BY WarehouseID DESC, SKU ASC;
+
+-- 2.29
+select SKU, SKU_Description, WarehouseID, QuantityOnHand
+from INVENTORY
+where QuantityOnHand > 1
+And QuantityOnHand < 10;
+
+-- 2.30
+select SKU, SKU_Description, WarehouseID, QuantityOnHand
+from INVENTORY
+where QuantityOnHand Between 1 and 9;
+
+-- 2.31
+select DISTINCT SKU, SKU_Description
+from INVENTORY
+where SKU_Description LIKE 'Half-Dome%'; -- starting with the word
+
+-- 2.32
+select DISTINCT SKU, SKU_Description
+from INVENTORY
+where SKU_Description LIKE '%Climb%';
+
+-- 2.33
+select DISTINCT SKU, SKU_Description
+from INVENTORY
+where SKU_Description LIKE '__d%';
+
+-- 2.34
+select SUM(QuantityOnHand) As QuantityOnHandSum,
+		AVG(QuantityOnHand) As QuantityOnHandAvg,
+        MIN(QuantityOnHand) As QuantityOnHandMin,
+        MAX(QuantityOnHand) As QuantityOnHandMax,
+        COUNT(QuantityOnHand) As QuantityOnHandCount
+from INVENTORY;
+
+-- 2.36
+	select WarehouseID, SUM(QuantityOnHand) As TotalItemsOnHand
+    from INVENTORY
+    GROUP BY WarehouseID
+    ORDER BY TotalItemsOnHand DESC;
+    
+-- 2.37
+	select WarehouseID, SUM(QuantityOnHand) As TotalItemsOnHandLT3
+    from INVENTORY
+    where QuantityOnHand < 3
+    GROUP BY WarehouseID
+    ORDER BY TotalItemsOnHandLT3 DESC;
+    
+-- 2.38
+	select WarehouseID, SUM(QuantityOnHand) As TotalItemsOnHandLT3
+    from INVENTORY
+    where QuantityOnHand < 3
+    GROUP BY WarehouseID
+    Having COUNT(SKU) < 2
+    ORDER BY TotalItemsOnHandLT3 DESC;
