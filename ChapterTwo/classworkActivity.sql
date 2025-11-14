@@ -112,3 +112,4 @@ from INVENTORY;
     GROUP BY WarehouseID
     Having COUNT(SKU) < 2
     ORDER BY TotalItemsOnHandLT3 DESC;
+    
