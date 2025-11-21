@@ -1,3 +1,4 @@
+use cape_codd;
 -- 2.40
 	select 	SKU, SKU_Description, INVENTORY.WarehouseID,Warehouse.WarehouseID, WarehouseCity, WarehouseState
     from INVENTORY
